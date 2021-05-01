@@ -1,0 +1,396 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Project Mesa API",
+        "description": "Project Mesa API documentation",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api",
+    "parameters": {
+        "Authorization": {
+            "name": "authorization",
+            "in": "header",
+            "description": "Authorization Token to API Access",
+            "type": "string",
+            "required": true,
+            "pattern": "^Bearer ."
+        },
+        "localId": {
+            "name": "localId",
+            "in": "path",
+            "type": "number",
+            "description": "Local ID",
+            "required": true
+        },
+        "userId": {
+            "name": "userId",
+            "in": "path",
+            "type": "number",
+            "description": "User ID",
+            "required": true
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/v1/addUser": {
+            "post": {
+                "summary": "Add user",
+                "description": "Add user to system",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public routes"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Add user request object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/addUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/addUserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "object",
+                            "description": "Password out of format",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Password format",
+                                    "example": "Password must have at least 8 characters and include numbers and letters."
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/addLocal": {
+            "post": {
+                "summary": "Add local",
+                "description": "Logout the loged user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Private routes"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Add local request object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/addLocalRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/addLocalResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getLocals": {
+            "get": {
+                "summary": "Get local list",
+                "description": "Get all locals in list format",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Private routes"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Authorization"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getLocalsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/updateLocal": {
+            "update": {
+                "summary": "Update local",
+                "description": "Update a local",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public routes"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/definitions/updateLocalRequest"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getLocalsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/authenticate": {
+            "post": {
+                "summary": "Authenticate user",
+                "description": "Authenticate user in system",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public routes"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Authenticate user request object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/authenticateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/authenticateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "User allready logged",
+                        "schema": {
+                            "type": "object",
+                            "description": "User allready logged in system",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "User allready logged",
+                                    "example": "User allready logged."
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "addLocalRequest": {
+            "type": "object",
+            "description": "Residence Opportunity Request",
+            "required": [
+                "name",
+                "description",
+                "ResidenceLeadData"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Local name",
+                    "example": "Hot point"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Local name",
+                    "example": "Hot point"
+                },
+                "lat": {
+                    "type": "number",
+                    "description": "Local latitude",
+                    "example": -19.9154
+                },
+                "lng": {
+                    "type": "number",
+                    "description": "Local longitude",
+                    "example": -43.9273
+                }
+            }
+        },
+        "addLocalResponse": {
+            "type": "object",
+            "description": "Local add result object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Result message",
+                    "example": "Local added successfully."
+                }
+            }
+        },
+        "getLocalsResponse": {
+            "type": "object",
+            "description": "Local object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Local ID",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Local name",
+                    "example": "Cinemark"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Local description",
+                    "example": "A good movie theater"
+                },
+                "rate": {
+                    "type": "number",
+                    "description": "Local rate",
+                    "example": 4.5
+                },
+                "address": {
+                    "type": "string",
+                    "description": "Local address",
+                    "example": "Av cristiano machado 453, Bairro cidade Nova"
+                }
+            }
+        },
+        "updateLocalRequest": {
+
+        },
+        "addUserRequest": {
+            "type": "object",
+            "description": "Add user Request",
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "User name",
+                    "example": "andrew"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "email@email.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "1234abcd"
+                }
+            }
+        },
+        "addUserResponse": {
+            "type": "object",
+            "description": "User add result object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Result message",
+                    "example": "User added successfully."
+                }
+            }
+        },
+        "authenticateRequest": {
+            "type": "object",
+            "description": "Authentication Request",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "email@email.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "1234abcd"
+                }
+            }
+        },
+        "authenticateResponse": {
+            "type": "object",
+            "description": "Authentication Request",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "description": "Authentication token",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1Y2hpbmlhbmRyZXdAZ21haWwuY29tIiwiaWF0IjoxNjE4MzU2Mzk2LCJleHAiOjE2MTgzNTk5OTZ9.o9Xes0a4IkYG0SAuUp0pdevaf9CgZfeXX3tsUFq9_EE"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "description": "Local object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Error message",
+                    "example": "Empty email parameter."
+                }
+            }
+        }
+    }
+}
