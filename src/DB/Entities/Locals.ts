@@ -1,6 +1,6 @@
 import Local from "../../Types/Locals"
 import BaseEntitie from "./BaseEntitie"
-import { RegisterNotFound } from "./errors"
+import { RegisterNotFound, LocalAllreadyAdded } from "./errors"
 
 class LocalTable extends BaseEntitie {
     registers: Local[]
@@ -12,6 +12,9 @@ class LocalTable extends BaseEntitie {
         this.id = 0
     }
     public addRegister(local: Local): void {
+        if (this.checkLocalAllreadyAdded(local.name)) {
+            throw new LocalAllreadyAdded()
+        }
         this.registers.push({ ...local, id: this.id++ })
     }
     findRegister(id: number): Local | undefined {
@@ -38,6 +41,9 @@ class LocalTable extends BaseEntitie {
     }
     getLocalIndex(id: number): number {
         return this.registers.findIndex(local => local.id === id)
+    }
+    checkLocalAllreadyAdded(name: string) {
+        return this.registers.find(local => local.name === name)
     }
 }
 export default new LocalTable()

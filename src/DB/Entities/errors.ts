@@ -8,7 +8,14 @@ export class RegisterNotFound extends Error {
 export class EmailAllreadyInUse extends Error {
     code: number
     constructor() {
-        super("Email allready in use..")
+        super("Email allready in use.")
+        this.code = 400
+    }
+}
+export class LocalAllreadyAdded extends Error {
+    code: number
+    constructor() {
+        super("Local allready added.")
         this.code = 400
     }
 }
