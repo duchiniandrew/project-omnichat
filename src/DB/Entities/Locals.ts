@@ -20,29 +20,31 @@ class LocalTable extends BaseEntitie {
     findRegister(id: number): Local | undefined {
         return this.registers.find(local => local.id === id)
     }
-    getAll() {
+    getAll(): Local[] {
         return this.registers
     }
-    updateRegister(id: number, newLocal: Local) {
+    updateRegister(id: number, newLocal: Local): void {
         const localIndex = this.getLocalIndex(id)
         if (localIndex >= 0) {
             this.registers[localIndex] = newLocal
-            return { message: "Local successfully updated." }
         }
-        throw new RegisterNotFound()
+        else {
+            throw new RegisterNotFound()
+        }
     }
-    deleteRegister(id: number) {
+    deleteRegister(id: number): void {
         const localIndex = this.getLocalIndex(id)
         if (localIndex >= 0) {
             this.registers.splice(localIndex, 1)
-            return { message: "Local successfully deleted." }
         }
-        throw new RegisterNotFound()
+        else {
+            throw new RegisterNotFound()
+        }
     }
     getLocalIndex(id: number): number {
         return this.registers.findIndex(local => local.id === id)
     }
-    checkLocalAllreadyAdded(name: string) {
+    checkLocalAllreadyAdded(name: string): Local | undefined {
         return this.registers.find(local => local.name === name)
     }
 }

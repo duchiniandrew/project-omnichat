@@ -1,6 +1,8 @@
 import Express from "express"
 import { json } from "body-parser"
 
+import Logger from "../lib/logger"
+import morganMiddleware from "../Middlewares/morgan"
 import authMiddleware from "../Middlewares/auth"
 import authenticate from "../Controllers/authentication"
 
@@ -16,8 +18,17 @@ import * as swaggerFile from "../api-spec.json"
 
 const app = Express()
 app.use(json())
+app.use()
 
 export default function routes() {
+
+    app.get("/logger", (req, res) => {
+        Logger.error("This is an error log");
+        Logger.warn("This is a warn log");
+        Logger.info("This is a info log");
+        Logger.http("This is a http log");
+        Logger.debug("This is a debug log");
+    })
     app.use('/api/docs', serve, setup(swaggerFile));
 
     app.post("/api/v1/addLocal", authMiddleware, addLocal)

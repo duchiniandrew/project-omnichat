@@ -10,10 +10,8 @@ export default function authenticate({ email, password }: User) {
     }
     const user = UserTable.findUserByEmailAndPassword(email, password)
     if (user) {
-        return { token: jwt.sign({ id: user.id }, process.env.SECRET as Secret, expirationTime) };
+        return jwt.sign({ id: user.id }, process.env.SECRET as Secret, expirationTime)
     }
-    else {
-        console.log(`User ${email} failed authenticated. - ${new Date()}`)
         throw new FailedAuthentication()
     }
 }

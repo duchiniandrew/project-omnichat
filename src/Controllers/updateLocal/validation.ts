@@ -2,7 +2,6 @@ import { EmptyNameError, NameFormatError, EmptyDescriptionError, EmptyAddressErr
 import Local from "../../Types/Locals"
 
 export default function validation({ name, description, address, rate }: Local) {
-    console.log("Checking update Local Request parameters - " + new Date())
     if (name === "") {
         throw new EmptyNameError()
     }

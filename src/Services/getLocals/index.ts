@@ -1,8 +1,8 @@
 import LocalTable from "../../DB/Entities/Locals"
+import Local from "../../Types/Locals"
 
-export default function getAll() {
+export default function getAll(): Local[] {
     try {
-        console.log("Getting locals list. - " + new Date())
         return LocalTable.getAll()
     }
     catch (error) {

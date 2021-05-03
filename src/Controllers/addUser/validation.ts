@@ -3,7 +3,6 @@ import testPassword from "../../Utils/validatePassword"
 import User from "../../Types/User"
 
 export default function validation({ name, email, password }: User) {
-    console.log("Checking add User Request parameters - " + new Date())
     if (name === "") {
         throw new EmptyNameError()
     }
