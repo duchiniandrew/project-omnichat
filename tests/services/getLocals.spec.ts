@@ -1,4 +1,4 @@
-import getLocalsService from "../../../src/Services/getLocals"
+import getLocalsService from "../../src/Services/getLocals"
 
 describe("Testing getLocals service", () => {
     it("Should return a success object", () => {

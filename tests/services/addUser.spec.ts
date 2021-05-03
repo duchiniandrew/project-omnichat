@@ -1,5 +1,5 @@
-import adduserService from "../../../src/Services/addUser"
-import User from "../../../src/Types/User"
+import adduserService from "../../src/Services/addUser"
+import User from "../../src/Types/User"
 
 describe("Testing addUser service", () => {
     it("Should add user", () => {
@@ -10,6 +10,6 @@ describe("Testing addUser service", () => {
             password: "1234abcd"
         }
 
-        expect(adduserService(userToAdd)).toStrictEqual({ message: "user successfully added." })
+        expect(adduserService(userToAdd)).toStrictEqual("user successfully added.")
     })
 })

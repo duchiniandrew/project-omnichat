@@ -1,5 +1,5 @@
-import getUserService from "../../../src/Services/getUser"
-import User from "../../../src/Types/User"
+import getUserService from "../../src/Services/getUser"
+import User from "../../src/Types/User"
 
 describe("Testing getUser service", () => {
     it("Should return a user", () => {
