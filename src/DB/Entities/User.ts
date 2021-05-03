@@ -1,4 +1,4 @@
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 import BaseEntitie from "./BaseEntitie"
 
 import { EmailAllreadyInUse } from "./errors"

@@ -1,4 +1,4 @@
-import Local from "../../Types/Locals"
+import { Local } from "../../Types/Locals"
 import BaseEntitie from "./BaseEntitie"
 import { RegisterNotFound, LocalAllreadyAdded } from "./errors"
 

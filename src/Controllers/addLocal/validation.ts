@@ -1,5 +1,5 @@
 import { EmptyNameError, NameFormatError, EmptyDescriptionError, EmptyAddressError, EmptyRateError } from "./errors"
-import Local from "../../Types/Locals"
+import { Local } from "../../Types/Locals"
 
 export default function validation({ name, description, address, rate }: Local) {
     if (name === "") {

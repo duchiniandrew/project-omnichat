@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken"
 import getUser from "../Services/getUser"
-import User from "../Types/User"
+import { User } from "../Types/User"
 
 export default function authenticateToken(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers['authorization']

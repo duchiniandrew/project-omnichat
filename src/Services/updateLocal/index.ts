@@ -1,4 +1,4 @@
-import Local from "../../Types/Locals"
+import { Local } from "../../Types/Locals"
 import LocalTable from "../../DB/Entities/Locals"
 
 export default function updateLocal(local: Local) {

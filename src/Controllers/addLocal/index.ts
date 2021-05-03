@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 
 import validation from "./validation"
 import addLocalService from "../../Services/addLocal"
-import Local from "../../Types/Locals"
+import { Local } from "../../Types/Locals"
 
 export default function addLocal(req: Request, res: Response) {
     try {

@@ -1,6 +1,6 @@
 import { EmptyEmailError, EmptyNameError, EmptyPasswordError, FormatPasswordError, NameFormatError } from "./errors"
 import testPassword from "../../Utils/validatePassword"
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 
 export default function validation({ name, email, password }: User) {
     if (name === "") {

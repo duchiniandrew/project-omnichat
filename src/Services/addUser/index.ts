@@ -1,4 +1,4 @@
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 import UserTable from "../../DB/Entities/User"
 
 export default function addUser(user: User) {

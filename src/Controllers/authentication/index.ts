@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 
 import validation from "./validation"
 import authService from "../../Services/authenticate"
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 
 export default function authentication(req: Request, res: Response) {
     try {

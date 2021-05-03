@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 
 import addUserService from "../../Services/addUser"
 import validation from "./validation"
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 
 export default function addUser(req: Request, res: Response) {
     try {

@@ -1,7 +1,7 @@
 import jwt, { Secret } from "jsonwebtoken"
 
 import { FailedAuthentication } from "../../Controllers/authentication/errors"
-import User from "../../Types/User"
+import { User } from "../../Types/User"
 import UserTable from "../../DB/Entities/User"
 
 export default function authenticate({ email, password }: User) {
