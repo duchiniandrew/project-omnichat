@@ -12,6 +12,7 @@ export default function authenticate({ email, password }: User) {
     if (user) {
         return jwt.sign({ id: user.id }, process.env.SECRET as Secret, expirationTime)
     }
+    else {
         throw new FailedAuthentication()
     }
 }
